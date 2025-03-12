@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// ExcelColumn 的摘要描述
+/// </summary>
+[AttributeUsage(AttributeTargets.Property)]
+public class ExcelColumn:Attribute
+{
+    public string Name;
+    public bool IsStatic;
+ 
+    public ExcelColumn(string name,bool isStatic=true)
+    {
+        Name = name;
+        IsStatic = isStatic;
+    }
+}

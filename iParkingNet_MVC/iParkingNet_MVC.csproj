@@ -1,0 +1,975 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A42D0370-0B97-4704-87ED-51485EDF8E57}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iParkingNet_MVC</RootNamespace>
+    <AssemblyName>iParkingNet_MVC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44332</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebaseAdmin, Version=2.3.0.0, Culture=neutral, PublicKeyToken=97c8d00c348326ed, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseAdmin.2.3.0\lib\net461\FirebaseAdmin.dll</HintPath>
+    </Reference>
+    <Reference Include="Fleck, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fleck.1.2.0\lib\net45\Fleck.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoTimeZone, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e20ab7d0d9479841, processorArchitecture=MSIL">
+      <HintPath>..\packages\GeoTimeZone.4.1.0\lib\net461\GeoTimeZone.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.CommonProtos, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.CommonProtos.2.5.0\lib\net461\Google.Api.CommonProtos.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.3.6.0\lib\net461\Google.Api.Gax.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax.Grpc, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.Grpc.3.6.0\lib\net461\Google.Api.Gax.Grpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax.Grpc.GrpcCore, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.Grpc.GrpcCore.3.6.0\lib\net461\Google.Api.Gax.Grpc.GrpcCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax.Rest, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.Rest.3.2.0\lib\net461\Google.Api.Gax.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Cloud.Firestore, Version=2.5.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Cloud.Firestore.2.5.0\lib\net461\Google.Cloud.Firestore.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Cloud.Firestore.V1, Version=2.5.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Cloud.Firestore.V1.2.5.0\lib\net461\Google.Cloud.Firestore.V1.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.LongRunning, Version=2.3.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.LongRunning.2.3.0\lib\net461\Google.LongRunning.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.18.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.18.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Auth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grpc.Auth.2.41.0\lib\net45\Grpc.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grpc.Core.2.41.0\lib\net45\Grpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core.Api, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grpc.Core.Api.2.41.0\lib\net45\Grpc.Core.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jose-jwt.4.0.0\lib\net461\jose-jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.0.1\lib\net46\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=3.1.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.3.1.0\lib\netstandard2.0\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq.Async, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Async.4.0.0\lib\net461\System.Linq.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\ApiResourceEN.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApiResourceEN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ApiResourceTC.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApiResourceTC.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WebApi\ArgueController.cs" />
+    <Compile Include="Controllers\WebApi\BaseApiController.cs" />
+    <Compile Include="Controllers\WebApi\LoadController.cs" />
+    <Compile Include="Controllers\WebApi\MailController.cs" />
+    <Compile Include="Controllers\WebApi\ManagerController.cs" />
+    <Compile Include="Controllers\WebApi\MemberController.cs" />
+    <Compile Include="Controllers\WebApi\OrderController.cs" />
+    <Compile Include="Controllers\WebApi\RatingController.cs" />
+    <Compile Include="Controllers\WebApi\SMSController.cs" />
+    <Compile Include="Controllers\WebApi\TestController.cs" />
+    <Compile Include="Controllers\WebApi\v2\Load_v2_Controller.cs" />
+    <Compile Include="Controllers\WebApi\v2\Manager_v2_Controller.cs" />
+    <Compile Include="DevLibs\Attribute\BaseParser.cs" />
+    <Compile Include="DevLibs\Builder\Security\SecurityBuilder.cs" />
+    <Compile Include="DevLibs\Connect\EkiSms.cs" />
+    <Compile Include="DevLibs\Connect\Mail\MailMsg.cs" />
+    <Compile Include="DevLibs\Connect\Mail\MsgBundle.cs" />
+    <Compile Include="DevLibs\Connect\Mail\Smtp.cs" />
+    <Compile Include="DevLibs\Connect\Mail\SmtpConfig.cs" />
+    <Compile Include="DevLibs\Connect\RemotePost.cs" />
+    <Compile Include="DevLibs\Connect\WebConnect.cs" />
+    <None Include="DevLibs\Connect\WebConnect.cs.bak2" />
+    <Compile Include="DevLibs\DevLib.cs" />
+    <Compile Include="DevLibs\DTO\ImgSizeType.cs" />
+    <Compile Include="DevLibs\DTO\LatLng.cs" />
+    <Compile Include="DevLibs\Enum\ClientContentType.cs" />
+    <Compile Include="DevLibs\Enum\ColorName.cs" />
+    <Compile Include="DevLibs\Enum\DateUnit.cs" />
+    <Compile Include="DevLibs\Enum\DistanceUnit.cs" />
+    <Compile Include="DevLibs\Enum\EncryptFormat.cs" />
+    <Compile Include="DevLibs\Enum\LanguageFamily.cs" />
+    <Compile Include="DevLibs\Enum\OrderBy.cs" />
+    <Compile Include="DevLibs\Enum\RandomString.cs" />
+    <Compile Include="DevLibs\Extension\LibExtension.cs" />
+    <Compile Include="DevLibs\Extension\SqlExt.cs" />
+    <Compile Include="DevLibs\Impl\IDbConfig.cs" />
+    <Compile Include="DevLibs\Impl\IFormDataControl.cs" />
+    <Compile Include="DevLibs\Impl\ISql.cs" />
+    <Compile Include="DevLibs\Parser\Parser.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Attribute\EcPayFeature.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Connect\EcPayConnect.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\EcPayConfig.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Enum\EcPayment.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Enum\EcPayResult.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Extension\EcPayExt.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Impl\IEcPayCheck.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Impl\IEcPayConnectSet.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Request\EcPayRequest.cs" />
+    <Compile Include="DevLibs\Payment\EcPay\Response\EcPayResponse.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\Impl\ILinePayConfig.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\LinePay.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\LinePayExt.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\Model\LineCode.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\Model\LinePayConfirm.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\Model\LinePayReserve.cs" />
+    <Compile Include="DevLibs\Payment\LinePay\Model\LinePayResult.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Attribute\NewebPaySet.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\CreditCard\NewebPayCreditCard.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\CreditCard\NewebPayCreditModel.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\CreditCard\NewebPayCreditReturn.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Impl\INewebPayBackUrl.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Impl\INewebPayConfig.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Invoice\NewebPayInvoice.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Invoice\NewebPayInvoiceModel.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Invoice\NewebPayInvoiceResult.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\Invoice\NewebPayInvoiceReturn.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\MPG\NewebPayInfoParser.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\MPG\NewebPayMPG.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\MPG\NewebPayMPGModel.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\MPG\NewebPayMPGReturn.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\NewebPay.cs" />
+    <Compile Include="DevLibs\Payment\NewebPay\NewebPayUtil.cs" />
+    <Compile Include="DevLibs\Sql\Annotaion\DbRowKey.cs" />
+    <Compile Include="DevLibs\Sql\Annotaion\DbTableSet.cs" />
+    <Compile Include="DevLibs\Sql\BaseDbDAO.cs" />
+    <Compile Include="DevLibs\Sql\DbOperationModel.cs" />
+    <Compile Include="DevLibs\Sql\Exception\DataTypeException.cs" />
+    <Compile Include="DevLibs\Sql\Exception\DbModelException.cs" />
+    <Compile Include="DevLibs\Sql\Exception\RowNoValueException.cs" />
+    <Compile Include="DevLibs\Sql\Exception\SqlPairException.cs" />
+    <Compile Include="DevLibs\Sql\SqlCmd.cs" />
+    <Compile Include="DevLibs\Sql\SqlContext.cs" />
+    <Compile Include="DevLibs\Sql\TableParaser.cs" />
+    <Compile Include="DevLibs\Util\DistanceUtil.cs" />
+    <Compile Include="DevLibs\Util\FileUtil.cs" />
+    <Compile Include="DevLibs\Util\ImgUtil.cs" />
+    <Compile Include="DevLibs\Util\RandomUtil.cs" />
+    <Compile Include="DevLibs\Util\ResUtil.cs" />
+    <Compile Include="DevLibs\Util\SafeUtil.cs" />
+    <Compile Include="DevLibs\Util\TextUtil.cs" />
+    <Compile Include="DevLibs\Util\TimeUtil.cs" />
+    <Compile Include="DevLibs\Util\Twenty_six_Sys.cs" />
+    <Compile Include="DevLibs\Util\WebUtil.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\EcPayReceiver.ashx.cs">
+      <DependentUpon>EcPayReceiver.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\NewebPayReceiver.ashx.cs">
+      <DependentUpon>NewebPayReceiver.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionFilter\BaseFilterAttr.cs" />
+    <Compile Include="Models\ActionFilter\EkiSecretFilter.cs" />
+    <Compile Include="Models\Check\CheckProcess.cs" />
+    <Compile Include="Models\Check\ForbiddenCheck.cs" />
+    <Compile Include="Models\Check\OpenCheck.cs" />
+    <Compile Include="Models\Check\OrderCancelCheck.cs" />
+    <Compile Include="Models\Check\OrderNoPayCheck.cs" />
+    <Compile Include="Models\Check\OrderSameTimeCheck.cs" />
+    <Compile Include="Models\Const\ApiConfig.cs" />
+    <Compile Include="Models\Const\ChargeAdapter.cs" />
+    <Compile Include="Models\Const\DirPath.cs" />
+    <Compile Include="Models\Const\EkiBroadCastMethod.cs" />
+    <Compile Include="Models\Const\EkiLinePay.cs" />
+    <Compile Include="Models\Const\EkiScheme.cs" />
+    <Compile Include="Models\Const\EkiSql.cs" />
+    <Compile Include="Models\Const\Firestore_iParkingNet.cs" />
+    <Compile Include="Models\Const\MailConfig.cs" />
+    <Compile Include="Models\Const\PayConfig.cs" />
+    <Compile Include="Models\Const\RequestFlag.cs" />
+    <Compile Include="Models\Delegate\RequestConvertDelegate.cs" />
+    <Compile Include="Models\DTO\EkiPostImg.cs" />
+    <Compile Include="Models\DTO\FcmNotification.cs" />
+    <Compile Include="Models\DTO\Forbidden.cs" />
+    <Compile Include="Models\DTO\GoogleApi.cs" />
+    <Compile Include="Models\DTO\OpenSet.cs" />
+    <Compile Include="Models\Encoder\EkiEncoder.cs" />
+    <Compile Include="Models\Encoder\EkiHashCode.cs" />
+    <Compile Include="Models\EnumClass\ActionType.cs" />
+    <Compile Include="Models\EnumClass\ArgueSource.cs" />
+    <Compile Include="Models\EnumClass\ArgueType.cs" />
+    <Compile Include="Models\EnumClass\AvailableStatus.cs" />
+    <Compile Include="Models\EnumClass\ChargeSocket.cs" />
+    <Compile Include="Models\EnumClass\CreditCategory.cs" />
+    <Compile Include="Models\EnumClass\CurrencyUnit.cs" />
+    <Compile Include="Models\EnumClass\CurrentUnit.cs" />
+    <Compile Include="Models\EnumClass\InvoiceType.cs" />
+    <Compile Include="Models\EnumClass\MobilType.cs" />
+    <Compile Include="Models\EnumClass\NotifyType.cs" />
+    <Compile Include="Models\EnumClass\OrderStatus.cs" />
+    <Compile Include="Models\EnumClass\OrderType.cs" />
+    <Compile Include="Models\EnumClass\PayCreditType.cs" />
+    <Compile Include="Models\EnumClass\PriceMethod.cs" />
+    <Compile Include="Models\EnumClass\PriceMethodSet.cs" />
+    <Compile Include="Models\EnumClass\SitePosition.cs" />
+    <Compile Include="Models\EnumClass\SiteSize.cs" />
+    <Compile Include="Models\EnumClass\SiteType.cs" />
+    <Compile Include="Models\EnumClass\VerifyStatus.cs" />
+    <Compile Include="Models\EnumClass\VerifyType.cs" />
+    <Compile Include="Models\EnumClass\WeekEnum.cs" />
+    <Compile Include="Models\Exception\AccountException.cs" />
+    <Compile Include="Models\Exception\AccountNotExistException.cs" />
+    <Compile Include="Models\Exception\AddErrorException.cs" />
+    <Compile Include="Models\Exception\EmailExistException.cs" />
+    <Compile Include="Models\Exception\GoogleApiException.cs" />
+    <Compile Include="Models\Exception\InputFormatException.cs" />
+    <Compile Include="Models\Exception\NoSuchRuleException.cs" />
+    <Compile Include="Models\Exception\OrderNoPayException.cs" />
+    <Compile Include="Models\Exception\OutOfDateTimeException.cs" />
+    <Compile Include="Models\Exception\OutOfLimitException.cs" />
+    <Compile Include="Models\Exception\OutOfNumberException.cs" />
+    <Compile Include="Models\Exception\PermissionException.cs" />
+    <Compile Include="Models\Exception\PhoneExistException.cs" />
+    <Compile Include="Models\Exception\TimeOverlapException.cs" />
+    <Compile Include="Models\Extension\AppExtend.cs" />
+    <Compile Include="Models\Extension\ListExtend.cs" />
+    <Compile Include="Models\Extension\SerNumExtend.cs" />
+    <Compile Include="Models\Fcm\FcmConfig.cs" />
+    <Compile Include="Models\Fcm\FcmExt.cs" />
+    <None Include="Models\Fcm\FcmManager.cs.bak" />
+    <Compile Include="Models\Fcm\FcmManager.cs" />
+    <Compile Include="Models\Fcm\IFcmMsg.cs" />
+    <Compile Include="Models\Fcm\IFcmSet.cs" />
+    <Compile Include="Models\Fcm\IiosPushNotify.cs" />
+    <Compile Include="Models\Impl\ApiFeature_v2.cs" />
+    <Compile Include="Models\Impl\IBitmapImg.cs" />
+    <Compile Include="Models\Impl\IBroadCastMsg.cs" />
+    <Compile Include="Models\Impl\ICheckValid.cs" />
+    <Compile Include="Models\Impl\IConvertData.cs" />
+    <Compile Include="Models\Impl\IConvertResponse.cs" />
+    <Compile Include="Models\Impl\ICryptoFormat.cs" />
+    <Compile Include="Models\Impl\ICryptoPwd.cs" />
+    <Compile Include="Models\Impl\ICurrencySet.cs" />
+    <Compile Include="Models\Impl\IEdit.cs" />
+    <Compile Include="Models\Impl\IEncoder.cs" />
+    <Compile Include="Models\Impl\IEncodeSet.cs" />
+    <Compile Include="Models\Impl\IHashCodeSet.cs" />
+    <Compile Include="Models\Impl\ILinkId.cs" />
+    <Compile Include="Models\Impl\IMapImg.cs" />
+    <Compile Include="Models\Impl\IMulctSet.cs" />
+    <Compile Include="Models\Impl\IOverLap.cs" />
+    <Compile Include="Models\Impl\IPhoneMap.cs" />
+    <Compile Include="Models\Impl\IPriceSet.cs" />
+    <Compile Include="Models\Impl\IPushSet.cs" />
+    <Compile Include="Models\Impl\IRange.cs" />
+    <Compile Include="Models\Impl\IRequestConvert.cs" />
+    <Compile Include="Models\Impl\IRuleCheck.cs" />
+    <Compile Include="Models\Impl\IRunable.cs" />
+    <Compile Include="Models\Impl\IScheme.cs" />
+    <Compile Include="Models\Impl\ISerialNumGenerator.cs" />
+    <Compile Include="Models\Impl\ITimeMap.cs" />
+    <Compile Include="Models\Impl\ITimeRange.cs" />
+    <Compile Include="Models\Impl\IToken.cs" />
+    <Compile Include="Models\Jwt\JwtAuthActionFilter.cs" />
+    <Compile Include="Models\Jwt\JwtAuthManagerFilter.cs" />
+    <Compile Include="Models\Jwt\JwtAuthObject.cs" />
+    <Compile Include="Models\Jwt\JwtBuilder.cs" />
+    <Compile Include="Models\List\DbObjList.cs" />
+    <Compile Include="Models\List\ListConvert.cs" />
+    <Compile Include="Models\List\RequestObjList.cs" />
+    <Compile Include="Models\Manager\ArgueManager.cs" />
+    <Compile Include="Models\Manager\BaseManager.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\EkiOCPP.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Payload\EkiRemoStart.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\BaseCallMsgSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\BaseCallResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\AuthorizeNotifySort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\BootNotifySort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\HeartbeatNotifySort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\MeterValuesSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\StartTransactionSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\StatusNotifySort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Call\StopTransactionSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\ICallSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\IResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\ClearCacheResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\CompositeScheduleResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\RemoteStartTransactionResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\RemoteStopTransactionResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\ReservaNowResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\SendLocalListResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\TriggerMessageResultSort.cs" />
+    <Compile Include="Models\Manager\EkiOCPP\Sort\Result\UnlockConnectorResultSort.cs" />
+    <Compile Include="Models\Manager\FirestoreFrag\Path_PPYP.cs" />
+    <Compile Include="Models\Manager\LoadManager.cs" />
+    <Compile Include="Models\Manager\LocationOwnerManager.cs" />
+    <Compile Include="Models\Manager\MemberManager.cs" />
+    <Compile Include="Models\Manager\OrderManager.cs" />
+    <Compile Include="Models\Manager\RatingManager.cs" />
+    <Compile Include="Models\Model\ApiAbstractModel.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\CancelOrderContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\CheckOutContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\GetOrderContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\ManagerGetPayContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\ManagerOrderCancelContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\OrderExtendContent.cs" />
+    <Compile Include="Models\Model\BroadCastMsg\Content\SocketEventContent.cs" />
+    <Compile Include="Models\Model\DataListModel.cs" />
+    <Compile Include="Models\Model\RequestAbstractModel.cs" />
+    <Compile Include="Models\Model\Request\AddLocationRequest.cs" />
+    <Compile Include="Models\Model\Request\AddRequest.cs" />
+    <Compile Include="Models\Model\Request\AddressRequest.cs" />
+    <Compile Include="Models\Model\Request\ArgueRequest.cs" />
+    <Compile Include="Models\Model\Request\BankRequest.cs" />
+    <Compile Include="Models\Model\Request\ChargeSocketRequest.cs" />
+    <Compile Include="Models\Model\Request\CheckOutRequest.cs" />
+    <Compile Include="Models\Model\Request\Decode\BankDecode.cs" />
+    <Compile Include="Models\Model\Request\Decode\CreditDecode.cs" />
+    <Compile Include="Models\Model\Request\Decode\EditPwdDecode.cs" />
+    <Compile Include="Models\Model\Request\Decode\PwdDecode.cs" />
+    <Compile Include="Models\Model\Request\DeleteRequest.cs" />
+    <Compile Include="Models\Model\Request\EditLocationRequest.cs" />
+    <Compile Include="Models\Model\Request\EditOpenSetRequest.cs" />
+    <Compile Include="Models\Model\Request\EditPwdRequest.cs" />
+    <Compile Include="Models\Model\Request\ForgetPwdRequest.cs" />
+    <Compile Include="Models\Model\Request\LoadConfigRequest.cs" />
+    <Compile Include="Models\Model\Request\LoadLocationRequest.cs" />
+    <Compile Include="Models\Model\Request\LocationImgRequest.cs" />
+    <Compile Include="Models\Model\Request\LocationInfoRequest.cs" />
+    <Compile Include="Models\Model\Request\LoginRequest.cs" />
+    <Compile Include="Models\Model\Request\MemberCreditRequest.cs" />
+    <Compile Include="Models\Model\Request\MemberEditRequest.cs" />
+    <Compile Include="Models\Model\Request\MemberInfoRequest.cs" />
+    <Compile Include="Models\Model\Request\OpenTimeRequest.cs" />
+    <Compile Include="Models\Model\Request\OrderCancelImgRequest.cs" />
+    <Compile Include="Models\Model\Request\RatingRequest.cs" />
+    <Compile Include="Models\Model\Request\RegisterRequest.cs" />
+    <Compile Include="Models\Model\Request\ReservaConfigRequest.cs" />
+    <Compile Include="Models\Model\Request\ReservaRequest.cs" />
+    <Compile Include="Models\Model\Request\SearchRequest.cs" />
+    <Compile Include="Models\Model\Request\SendSmsRequest.cs" />
+    <Compile Include="Models\Model\Request\VehicleRequest.cs" />
+    <Compile Include="Models\Model\ResponseAbstractModel.cs" />
+    <Compile Include="Models\Model\ResponseInfoModel.cs" />
+    <Compile Include="Models\Model\Response\ActionResponse.cs" />
+    <Compile Include="Models\Model\Response\AddressResponseModel.cs" />
+    <Compile Include="Models\Model\Response\BankResponseModel.cs" />
+    <Compile Include="Models\Model\Response\CheckoutResponse.cs" />
+    <Compile Include="Models\Model\Response\Content\ResponseContent.cs" />
+    <Compile Include="Models\Model\Response\CpResponse.cs" />
+    <Compile Include="Models\Model\Response\DiscountResponse.cs" />
+    <Compile Include="Models\Model\Response\EkiOrderResponse.cs" />
+    <Compile Include="Models\Model\Response\GoogleMapResult.cs" />
+    <Compile Include="Models\Model\Response\IncomeResponse.cs" />
+    <Compile Include="Models\Model\Response\InvoiceResponse.cs" />
+    <Compile Include="Models\Model\Response\LocationInfoResponseModel.cs" />
+    <Compile Include="Models\Model\Response\LocationResponseModel.cs" />
+    <Compile Include="Models\Model\Response\LocMultiPageResponse.cs" />
+    <Compile Include="Models\Model\Response\MemberResponse.cs" />
+    <Compile Include="Models\Model\Response\MulctResponse.cs" />
+    <Compile Include="Models\Model\Response\NotifyResponse.cs" />
+    <Compile Include="Models\Model\Response\OpenTimeResponseModel.cs" />
+    <Compile Include="Models\Model\Response\ReservaConfigResponseModel.cs" />
+    <Compile Include="Models\Model\Response\ReservaTimeResponse.cs" />
+    <Compile Include="Models\Model\Response\VehicleInfoResponse.cs" />
+    <Compile Include="Models\Model\SecurityRequestModel.cs" />
+    <Compile Include="Models\Model\Sql\ActionPage.cs" />
+    <Compile Include="Models\Model\Sql\Address.cs" />
+    <Compile Include="Models\Model\Sql\Argue.cs" />
+    <Compile Include="Models\Model\Sql\BankInfo.cs" />
+    <Compile Include="Models\Model\Sql\Decode\BankSecretDecode.cs" />
+    <Compile Include="Models\Model\Sql\Decode\CreditInfoDecode.cs" />
+    <Compile Include="Models\Model\Sql\EkiAction.cs" />
+    <Compile Include="Models\Model\Sql\EkiCheckOut.cs" />
+    <Compile Include="Models\Model\Sql\EkiInvoice.cs" />
+    <Compile Include="Models\Model\Sql\EkiOrder.cs" />
+    <Compile Include="Models\Model\Sql\ErrorLog.cs" />
+    <Compile Include="Models\Model\Sql\InvoiceReturn.cs" />
+    <Compile Include="Models\Model\Sql\Location.cs" />
+    <Compile Include="Models\Model\Sql\LocationAD.cs" />
+    <Compile Include="Models\Model\Sql\LocationInfo.cs" />
+    <Compile Include="Models\Model\Sql\LocImg.cs" />
+    <Compile Include="Models\Model\Sql\LocSocket.cs" />
+    <Compile Include="Models\Model\Sql\LvPercent.cs" />
+    <Compile Include="Models\Model\Sql\ManagerCancelTime.cs" />
+    <Compile Include="Models\Model\Sql\ManagerMulct.cs" />
+    <Compile Include="Models\Model\Sql\ManagerRating.cs" />
+    <Compile Include="Models\Model\Sql\Map\Map_CancelTime_Mulct.cs" />
+    <Compile Include="Models\Model\Sql\Member.cs" />
+    <Compile Include="Models\Model\Sql\MemberCredit.cs" />
+    <Compile Include="Models\Model\Sql\MemberDiscount.cs" />
+    <Compile Include="Models\Model\Sql\MemberInfo.cs" />
+    <Compile Include="Models\Model\Sql\MemberPayInfo.cs" />
+    <Compile Include="Models\Model\Sql\MemberRating.cs" />
+    <Compile Include="Models\Model\Sql\NewebPayReturn.cs" />
+    <Compile Include="Models\Model\Sql\OCPP_Auth.cs" />
+    <Compile Include="Models\Model\Sql\OCPP_CP.cs" />
+    <Compile Include="Models\Model\Sql\OpenTime.cs" />
+    <Compile Include="Models\Model\Sql\OrderCancel.cs" />
+    <Compile Include="Models\Model\Sql\OrderLinePay.cs" />
+    <Compile Include="Models\Model\Sql\OrderPayRecord.cs" />
+    <Compile Include="Models\Model\Sql\ReservaConfig.cs" />
+    <Compile Include="Models\Model\Sql\ReservedTime.cs" />
+    <Compile Include="Models\Model\Sql\SalesData.cs" />
+    <Compile Include="Models\Model\Sql\SalesReferrer.cs" />
+    <Compile Include="Models\Model\Sql\ServerNotify.cs" />
+    <Compile Include="Models\Model\Sql\SmsLog.cs" />
+    <Compile Include="Models\Model\Sql\SysManager.cs" />
+    <Compile Include="Models\Model\Sql\TestTable.cs" />
+    <Compile Include="Models\Model\Sql\VehicleInfo.cs" />
+    <Compile Include="Models\Model\Sql\Verify.cs" />
+    <Compile Include="Models\Page\BaseHtmlControl.cs" />
+    <Compile Include="Models\Page\BaseMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Models\Page\BaseUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Models\Page\BaseWebPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Models\Page\Handler\BaseHandler.cs" />
+    <Compile Include="Models\Process\BaseProcess.cs" />
+    <Compile Include="Models\Process\OrderCheckOutProcess.cs" />
+    <Compile Include="Models\Process\SendManagerCancelOrderProcess.cs" />
+    <Compile Include="Models\Process\StartChargeProcess.cs" />
+    <Compile Include="Models\Process\StopChargeProcess.cs" />
+    <Compile Include="Models\Rule\DiscountCodeRule.cs" />
+    <Compile Include="Models\Rule\FilterOpenSiteRule.cs" />
+    <Compile Include="Models\Rule\IMulctRule.cs" />
+    <Compile Include="Models\Rule\ManagerMulctRule_In24Hour.cs" />
+    <Compile Include="Models\Rule\ManagerMulctRule_OneDay.cs" />
+    <Compile Include="Models\Rule\ManagerMulctRule_OneWeek.cs" />
+    <Compile Include="Models\Rule\ManagerMulctRule_ThreeDay.cs" />
+    <Compile Include="Models\Rule\ManagerMulctRule_TwoWeek.cs" />
+    <Compile Include="Models\Sms\SmsStatusCode.cs" />
+    <Compile Include="Models\Socket\BroadcastSocket.cs" />
+    <Compile Include="Models\Socket\Impl\FleckSocket.cs" />
+    <Compile Include="Models\Socket\Impl\IClientSocket.cs" />
+    <Compile Include="Models\Socket\Impl\IServerSocket.cs" />
+    <Compile Include="Models\Socket\ISocketMsg.cs" />
+    <Compile Include="Models\Socket\SocketMethod.cs" />
+    <Compile Include="Models\Socket\SocketMsgShell.cs" />
+    <Compile Include="Models\Socket\SocketReceiveMsg.cs" />
+    <Compile Include="Models\Util\SerialNumUtil.cs" />
+    <Compile Include="OCPP_1_6\Attribute\ConvertEnum.cs" />
+    <Compile Include="OCPP_1_6\Attribute\StatusEnum.cs" />
+    <Compile Include="OCPP_1_6\Attribute\UnitEnum.cs" />
+    <Compile Include="OCPP_1_6\Ext\OCPP_Ext.cs" />
+    <Compile Include="OCPP_1_6\Impl\IEnumConvert.cs" />
+    <Compile Include="OCPP_1_6\Impl\IMsgBuilder.cs" />
+    <Compile Include="OCPP_1_6\Impl\IOCPP_Enum.cs" />
+    <Compile Include="OCPP_1_6\Impl\IOCPP_Payload.cs" />
+    <Compile Include="OCPP_1_6\Impl\IOCPP_SendPayload.cs" />
+    <Compile Include="OCPP_1_6\Impl\IOCPP_SocketEvent.cs" />
+    <Compile Include="OCPP_1_6\Impl\IOCPP_Time.cs" />
+    <Compile Include="OCPP_1_6\Model\ChargePoint.cs" />
+    <Compile Include="OCPP_1_6\Model\ChargingSchedule.cs" />
+    <Compile Include="OCPP_1_6\Model\IdTagInfo.cs" />
+    <Compile Include="OCPP_1_6\Model\LocalAuthorization.cs" />
+    <Compile Include="OCPP_1_6\Model\MeterValue.cs" />
+    <Compile Include="OCPP_1_6\Model\SampleValue.cs" />
+    <Compile Include="OCPP_1_6\Model\TransactionData.cs" />
+    <Compile Include="OCPP_1_6\OCPPsocket.cs" />
+    <Compile Include="OCPP_1_6\OCPP_Config.cs" />
+    <Compile Include="OCPP_1_6\OCPP_Msg.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\AuthorizeResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\BootNotifyResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\ClearCacheResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\GetCompositeScheduleResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\HeartbeatResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\MeterValuesResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\RemoteStartTransactionResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\RemoteStopTransactionResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\ReservaNowResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\SendLocalListResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\StartTranscationResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\StatusNotifyResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\StopTransactionResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\TriggerMessageResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\CallResult\UnlockConnectorResult.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\AuthorizeCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\BootNotifyCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\ClearCacheCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\GetCompositeScheduleCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\GetConfigurationCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\GetLocalListVersionCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\MeterValuesCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\RemoteStartTransactionCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\RemoteStopTransactionCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\ReservaNowCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\SendLocalListCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\StartTranscationCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\StatusNotifyCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\StopTransactionCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\TriggerMessageCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Call\UnlockConnectorCall.cs" />
+    <Compile Include="OCPP_1_6\Payload\Enum\MsgType.cs" />
+    <Compile Include="OCPP_1_6\Payload\Enum\OCPP_Action.cs" />
+    <Compile Include="OCPP_1_6\Payload\Enum\OCPP_ErrorCode.cs" />
+    <Compile Include="OCPP_1_6\Payload\Enum\OCPP_Status.cs" />
+    <Compile Include="OCPP_1_6\Payload\Enum\UpdateType.cs" />
+    <Compile Include="OCPP_1_6\Payload\OCPP_Util.cs" />
+    <Compile Include="Page\DownLoad.aspx.cs">
+      <DependentUpon>DownLoad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\DownLoad.aspx.designer.cs">
+      <DependentUpon>DownLoad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\EcPayBack.aspx.cs">
+      <DependentUpon>EcPayBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\EcPayBack.aspx.designer.cs">
+      <DependentUpon>EcPayBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\LinePay\Cancel.aspx.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\LinePay\Cancel.aspx.designer.cs">
+      <DependentUpon>Cancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\LinePay\Confirm.aspx.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\LinePay\Confirm.aspx.designer.cs">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Pay.aspx.cs">
+      <DependentUpon>Pay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Pay.aspx.designer.cs">
+      <DependentUpon>Pay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\PayError.aspx.cs">
+      <DependentUpon>PayError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\PayError.aspx.designer.cs">
+      <DependentUpon>PayError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Return.aspx.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Return.aspx.designer.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Log\ReadMe.txt" />
+    <Content Include="OCPP_1_6\ReadMe.txt" />
+    <Content Include="Page\DownLoad.aspx" />
+    <Content Include="Page\EcPayBack.aspx" />
+    <Content Include="Page\LinePay\Cancel.aspx" />
+    <Content Include="Page\LinePay\Confirm.aspx" />
+    <Content Include="Page\Pay.aspx" />
+    <Content Include="Page\PayError.aspx" />
+    <Content Include="Page\Return.aspx" />
+    <Content Include="Page\Test.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DevLibs\Builder\Excel\ExcelBuilder.cs.exclude" />
+    <Content Include="DevLibs\Builder\Excel\ExcelColumn.cs.exclude" />
+    <Content Include="DevLibs\Builder\Excel\ExcelField.cs.exclude" />
+    <Content Include="DevLibs\Builder\Excel\SheetTemplete.cs.exclude" />
+    <Content Include="DevLibs\Builder\Excel\WorkSheet.cs.exclude" />
+    <Content Include="DevLibs\Extension\SqlExt.cs.bak" />
+    <Content Include="File\papaya_20191023.apk" />
+    <Content Include="File\papaya_20191211.apk" />
+    <Content Include="File\papaya_20200213.apk" />
+    <Content Include="File\papaya_20200213v2.apk" />
+    <Content Include="File\papaya_20200217.apk" />
+    <Content Include="File\papaya_20200812.apk" />
+    <Content Include="File\papaya_20200914.apk" />
+    <Content Include="File\papaya_20201014.apk" />
+    <Content Include="File\papaya_20201015.apk" />
+    <Content Include="File\papaya_20201022.apk" />
+    <Content Include="File\papaya_20201028.apk" />
+    <Content Include="File\papaya_20201030.apk" />
+    <Content Include="File\papaya_20201030_v0.1.5.apk" />
+    <Content Include="File\papaya_20201102.apk" />
+    <Content Include="File\papaya_20201102_v0.1.7.apk" />
+    <Content Include="File\papaya_20201103_v0.1.8.apk" />
+    <Content Include="File\papaya_20201106_v0.1.9.apk" />
+    <Content Include="File\papaya_20201117_v0.1.10.apk" />
+    <Content Include="File\papaya_20201119_v0.1.11.apk" />
+    <Content Include="File\papaya_20201123_v0.1.12.apk" />
+    <Content Include="File\papaya_20201125_v0.1.13.apk" />
+    <Content Include="File\papaya_20201127_v0.1.14.apk" />
+    <Content Include="File\papaya_20201209_v0.1.15.apk" />
+    <Content Include="File\papaya_20201218_v0.1.16.apk" />
+    <Content Include="File\papaya_20201221_v0.1.16.apk" />
+    <Content Include="File\papaya_20201231_v0.1.17.apk" />
+    <Content Include="File\papaya_20210108_v0.1.17.apk" />
+    <Content Include="File\papaya_20210111_v0.1.18.apk" />
+    <Content Include="File\papaya_20210114_v0.1.18.apk" />
+    <Content Include="File\papaya_20210122_v0.1.18.apk" />
+    <Content Include="File\papaya_20210122_v0.1.18_4.apk" />
+    <Content Include="File\papaya_20210204_v0.1.20.apk" />
+    <Content Include="File\papaya_20210205_v0.1.20_2.apk" />
+    <Content Include="File\papaya_20210218_v0.1.21.apk" />
+    <Content Include="File\papaya_20210303_v0.1.23.apk" />
+    <Content Include="File\papaya_20210414.apk" />
+    <Content Include="File\papaya_20210414_NoAnim.apk" />
+    <Content Include="File\papaya_20210415_v0.1.24.apk" />
+    <Content Include="File\papaya_20210531_v0.1.25.apk" />
+    <Content Include="File\papaya_20210723_v0.2.5.apk" />
+    <Content Include="File\papaya_20210726_v0.2.6.apk" />
+    <Content Include="File\papaya_20210727_v0.2.7_Realease.apk" />
+    <Content Include="File\papaya_20210903_v0.1.33.apk" />
+    <Content Include="File\papaya_20210910_v0.1.34.apk" />
+    <Content Include="File\papaya_20210916_v0.1.35.apk" />
+    <Content Include="File\papaya_20211006_v0.1.43.apk" />
+    <Content Include="File\papaya_20211014_v0.1.44.apk" />
+    <Content Include="File\papaya_20211126_v0.2.31.apk" />
+    <Content Include="File\papaya_20211221_v0.2.31.apk" />
+    <Content Include="File\papaya_20211222_v0.2.32.apk" />
+    <Content Include="File\papaya_20211227_v0.2.32.apk" />
+    <Content Include="File\papaya_20220107_v0.2.33.apk" />
+    <Content Include="File\papaya_20220110_v0.2.34.apk" />
+    <Content Include="File\papaya_20220110_v0.2.35.apk" />
+    <Content Include="File\papaya_20220112_v0.2.36.apk" />
+    <Content Include="File\papaya_20220113_v0.2.37.apk" />
+    <Content Include="File\papaya_20220114_v0.2.37.apk" />
+    <Content Include="File\papaya_20220329_v0.3.1.apk" />
+    <Content Include="Handler\NewebPayReceiver.ashx" />
+    <Content Include="Handler\EcPayReceiver.ashx" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\FcmApiFile.json" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Error\Status.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\Attribute\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ApiResourceTC.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ApiResourceTC.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\ApiResourceEN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ApiResourceEN.designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eki_Firestore\Eki_Firestore.csproj">
+      <Project>{dfd3149b-02f3-49b7-a20d-54d7e9f0ee20}</Project>
+      <Name>Eki_Firestore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61609</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44332/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

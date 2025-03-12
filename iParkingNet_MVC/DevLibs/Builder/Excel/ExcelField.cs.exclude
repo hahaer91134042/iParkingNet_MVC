@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// ExcelField 的摘要描述
+/// </summary>
+public class ExcelField
+{
+    public string Key;
+    public string  Value;
+    public ExcelField(object key,object value)
+    {
+        Key = key.ToString();
+        Value = value.ToString();
+    }
+}

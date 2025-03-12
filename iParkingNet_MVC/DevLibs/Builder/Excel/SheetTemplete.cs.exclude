@@ -1,0 +1,70 @@
+﻿using ClosedXML.Excel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// SheetTemplete 的摘要描述
+/// </summary>
+public class SheetTemplete
+{
+    public string Font = "新細明體";
+    public int FontSize = 10;
+    public XLAlignmentHorizontalValues AlignmentHorizontal = XLAlignmentHorizontalValues.Center;
+    public XLAlignmentVerticalValues AlignmentVertical = XLAlignmentVerticalValues.Center;
+    public bool WrapText = true;
+    public int CellWidth=0, CellHeight = 0;
+    public int HeaderHeight = 0;
+
+    public Dictionary<string, List<object>> rowValue = new Dictionary<string, List<object>>();
+
+    public SheetTemplete SetColumn<T>(List<T> columnList)
+    {
+        columnList.ForEach(column =>
+        {
+            foreach(var property in column.GetType().GetProperties())
+            {
+                if (!property.IsDefined(typeof(ExcelColumn), false)) continue;
+
+                var excelColumn = property.getAttribute<ExcelColumn>();
+                if (excelColumn.IsStatic)
+                {
+                    if (!rowValue.ContainsKey(excelColumn.Name))
+                        rowValue.Add(excelColumn.Name, new List<object>());
+                    SetValue(excelColumn.Name, property.GetValue(column, null));
+                }
+                else
+                {
+                    var field = property.GetValue(column, null) as ExcelField;
+                    if (!rowValue.ContainsKey(field.Key))
+                        rowValue.Add(field.Key, new List<object>());
+                    SetValue(field.Key, field.Value);
+                }               
+            }
+        });
+
+        return this;
+    }
+
+    public SheetTemplete SetColumnName(params string[] columns)
+    {
+        foreach (var name in columns)
+            if (!rowValue.ContainsKey(name))
+                rowValue.Add(name, new List<object>());
+        return this;
+    }
+
+    public SheetTemplete SetValue(string column, object value)
+    {
+        try
+        {
+            rowValue[column].Add(value);
+        }
+        catch (Exception)
+        {
+        }
+        return this;
+    }
+
+}

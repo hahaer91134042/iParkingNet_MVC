@@ -1,0 +1,110 @@
+﻿using DevLibs;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+/// <summary>
+/// WebConnect 的摘要描述
+/// </summary>
+public class WebConnect
+{
+    public interface IBody
+    {
+        string body();
+    }
+    public interface IConfig
+    {
+        string url();
+        Method method();
+        ClientContentType contentType();
+        void setHeader(HttpRequestHeaders header);
+    }
+    public enum Method
+    {
+        GET,
+        POST
+    }
+    public static WebConnect CreatBy(IConfig config)
+    {
+        var request = new HttpRequestMessage(
+            new HttpMethod(config.method().ToString()),
+            config.url());
+
+        var connect = new WebConnect(request);
+        connect.ContentType = config.contentType();
+        config.setHeader(connect.Header);
+        if (config is IBody)
+            connect.body = (config as IBody).body();
+
+        return connect;
+    }
+    public static WebConnect CreatGet(string url)
+    {
+        return new WebConnect(new HttpRequestMessage(HttpMethod.Get,url));
+    }
+    public static WebConnect CreatPost(string url)
+    {
+        return new WebConnect(new HttpRequestMessage(HttpMethod.Post, url))
+        {
+            ContentType = ClientContentType.ApplicationJson
+        };
+    }
+
+    private HttpRequestMessage request;
+    private HttpClient client = new HttpClient();
+    public ClientContentType ContentType { set; get; } = ClientContentType.TextXml;
+    public string body { get; set; } = "";
+    public long ContentLength { get { return request.Content.Headers.ContentLength??0; } set { request.Content.Headers.ContentLength = value; } }
+    public HttpStatusCode StatusCode { get; set; }
+    public HttpRequestHeaders Header { get { return request.Headers; } }
+
+    public WebConnect(HttpRequestMessage request)
+    {
+        this.request = request;
+    }
+
+    //public WebConnect XmlContent()
+    //{
+    //    request.ContentType = "text/xml;charset=utf-8";
+    //    return this;
+    //}
+
+    public WebConnect setBody(string data)
+    {
+        body = data;
+        return this;
+    }
+
+    public async Task<T> Connect<T>()
+    {
+        return JsonConvert.DeserializeObject<T>( await Connect());
+    }
+    public async Task<string> Connect()
+    {
+        request.Content = new StringContent(body, Encoding.UTF8, ContentType.Type);
+
+        //Log.d($"WebConnect sent to url->{request.RequestUri}");
+
+        var response = await client.SendAsync(request);
+        StatusCode = response.StatusCode;
+
+        //Log.d($"WebConnect response StatusCode->{StatusCode}  isSuccess->{response.IsSuccessStatusCode}");
+
+        var result = await response.Content.ReadAsStringAsync();
+        //Log.d($"WebConnect result->{result}");
+
+        if (response.IsSuccessStatusCode)
+            return result;
+        else
+            throw new Exception($"Connect not success result->{result}");
+    }
+
+}

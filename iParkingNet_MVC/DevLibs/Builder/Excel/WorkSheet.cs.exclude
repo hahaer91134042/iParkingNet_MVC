@@ -1,0 +1,115 @@
+﻿using ClosedXML.Excel;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// WorkSheet 的摘要描述
+/// </summary>
+public class WorkSheet
+{
+    private ExcelBuilder parent;
+    public string Name;
+    public int Position;
+    public IXLWorksheet sheet;
+
+    public double headerHeight { set { sheet.Row(1).Height = value; } }
+    public double cellsHeight { set { sheet.Rows().Height = value; } }
+    public double cellsWidth { set { sheet.Columns().Width = value; } }
+    public XLAlignmentHorizontalValues cellsAlignmentHorizontal { set { sheet.Cells().Style.Alignment.Horizontal = value; } }
+    public XLAlignmentVerticalValues cellsAlignmentVertical { set { sheet.Cells().Style.Alignment.Vertical = value; } }
+    //自動換行
+    public bool cellsWrapText { set { sheet.Cells().Style.Alignment.WrapText = value; } }
+    public SheetTemplete templete;
+
+    public WorkSheet(ExcelBuilder p, string name, int position)
+    {
+        this.parent = p;
+        this.Name = name;
+        this.Position = position;
+        sheet = parent.workBook.Worksheet(position);
+    }
+
+    public WorkSheet addTemplete(SheetTemplete templete)
+    {
+        if (this.templete != null)
+            sheet.Clear();
+
+        this.templete = templete;
+
+        var cellStyle = sheet.Cells().Style;
+        cellStyle.Font.SetFontName(templete.Font);
+        cellStyle.Font.SetFontSize(templete.FontSize);
+
+        if(templete.CellWidth>0)
+            cellsWidth = templete.CellWidth;
+        if(templete.CellHeight>0)
+            cellsHeight = templete.CellHeight;
+        if (templete.HeaderHeight > 0)
+            headerHeight = templete.HeaderHeight;
+
+        cellsWrapText = templete.WrapText;
+
+        var rowValue = templete.rowValue;
+        var column = 1;
+        foreach(var pair in rowValue)
+        {
+            addValue(1, column,pair.Key);
+            var values = pair.Value;
+            for(var row = 0; row < values.Count; row++)
+            {
+                addValue(row + 2, column, values[row]);
+            }
+            column++;
+        }
+
+        cellsAlignmentHorizontal = templete.AlignmentHorizontal;
+        cellsAlignmentVertical = templete.AlignmentVertical;       
+
+        return this;
+    }
+
+    public WorkSheet addValue(int row, int column, object value)
+    {
+        sheet.Cell(row, column).Value = value;
+        return this;
+    }
+
+    public WorkSheet addValue(string key, object value)
+    {
+        sheet.Cells(key).Value = value;
+        return this;
+    }
+
+    public WorkSheet getSheet(int position)
+    {
+        return parent.getSheet(position);
+    }
+    public WorkSheet addSheet(IXLWorksheet sheet, int position = 1)
+    {
+        return parent.addSheet(sheet, position);
+    }
+    public WorkSheet addSheet(IXLWorksheet sheet, string sheetName, int position = 1)
+    {
+        return parent.addSheet(sheet, sheetName, position);
+    }
+    public WorkSheet addSheet(string sheetName, int position = 1)
+    {
+        return parent.addSheet(sheetName, position);
+    }
+    /// <summary>
+    /// 生成實體文件
+    /// </summary>
+    /// <param name="file">完整檔案路徑\檔案名稱.副檔名</param>
+    public void SaveAs(string file)
+    {
+        parent.SaveAs(file);
+    }
+
+    public void SaveAs(Stream stream)
+    {
+        parent.SaveAs(stream);
+    }
+}

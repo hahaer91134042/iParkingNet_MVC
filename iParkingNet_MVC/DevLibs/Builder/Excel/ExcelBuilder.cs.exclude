@@ -1,0 +1,185 @@
+﻿using ClosedXML.Excel;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+
+/// <summary>
+/// ExcelBuilder 的摘要描述
+/// </summary>
+#region --ExcelBuilder-- 需使用ClosedXML
+
+//public class ExcelTemplate
+//{
+//    public static XLWorkbook getSavingPlanSheet(SavingPlan data, int calRowCount)
+//    {
+//        var lightBrown = "#DDD9C4";
+//        var lightBlue = "#DCE6F1";
+//        var lightPink = "#F2DCDB";
+//        var yellow = "#FFFF00";
+//        var font標楷體 = "標楷體";
+
+//        var workbook = new XLWorkbook();
+//        workbook.Style.Protection.SetLocked(false);
+
+//        var sheet = workbook.Worksheets.Add($"{data.planYear}年度計畫");
+//        //先把cell固定的值寫入
+//        sheet.Cell("A1").Value = "節能目標規劃";
+//        sheet.Cell("A2").Value = "年度";
+//        sheet.Cell("B2").Value = "全廠節能目標";
+//        sheet.Cell("C2").Value = "百分比";
+//        sheet.Cell("D2").Value = "減少用電(kWh/年)";
+//        sheet.Cell("E2").Value = "節省費用(元/年)";
+
+//        sheet.Cell("A4").Value = "109年度用電量(kWh/年)";
+//        sheet.Cell("B4").Value = "公司平均電價(元/kWh)";
+
+//        sheet.Cell("A6").Value = "項次";
+//        sheet.Cell("B6").Value = "目標";
+//        sheet.Cell("C6").Value = "標的";
+//        sheet.Cell("D6").Value = "行動計畫";
+//        sheet.Cell("E6").Value = "節能效益(kWh/年)";
+//        sheet.Cell("F6").Value = "節省經費(萬元/年)";
+//        sheet.Cell("G6").Value = "投資金額(萬元)";
+//        sheet.Cell("H6").Value = "回收年限(元)";
+//        sheet.Cell("I6").Value = "節電率(%)";
+//        sheet.Cell("J6").Value = "計畫預計結案時間";
+//        sheet.Cell("K6").Value = $"{data.planYear}年執行月份";
+//        sheet.Cell("L6").Value = $"{data.planYear}年節能效益(kWh/年)";
+//        sheet.Cell("M6").Value = $"{data.planYear}年節電率(%)";
+
+//        var totalRowPosition = 7 + calRowCount;
+//        sheet.Cell($"A{totalRowPosition}").Value = "Total";
+//        sheet.Cell($"B{totalRowPosition}").Value = "-";
+//        sheet.Cell($"C{totalRowPosition}").Value = "-";
+//        sheet.Cell($"D{totalRowPosition}").Value = "-";
+//        sheet.Cell($"J{totalRowPosition}").Value = "-";
+//        sheet.Cell($"K{totalRowPosition}").Value = "-";
+
+
+//        //所有CELL字體，大小跟對齊方式
+//        var styleBase = sheet.Cells().Style;
+//        styleBase.Font.SetFontName(font標楷體);
+//        styleBase.Font.SetFontSize(10);
+//        styleBase.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+//        styleBase.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+
+//        var title = sheet.Range(1,1,1,3).Merge();
+//        title.Style = styleBase;
+//        title.Style.Fill.BackgroundColor = XLColor.FromHtml(lightBrown);
+//        title.Style.Font.SetFontSize(18);
+//        //title.Value = "節能目標規劃";
+
+//        var subTitle = sheet.Ranges("A2:E2,A4:E4");
+//        subTitle.Style = styleBase;
+//        subTitle.Style.Fill.BackgroundColor = XLColor.FromHtml(lightBlue);
+//        subTitle.Style.Font.SetFontSize(12);
+
+//        var resultTitle1 = sheet.Range("A6:I6");
+//        resultTitle1.Style = styleBase;
+//        resultTitle1.Style.Fill.BackgroundColor = XLColor.FromHtml(lightBrown);
+//        resultTitle1.Style.Font.SetFontSize(12);
+
+//        var resultTitle2 = sheet.Range("J6:M6");
+//        resultTitle2.Style = styleBase;
+//        resultTitle2.Style.Fill.BackgroundColor = XLColor.FromHtml(lightPink);
+//        resultTitle2.Style.Font.SetFontSize(12);
+
+//        //黃色total條
+//        var totalRange = sheet.Range($"A{totalRowPosition}:M{totalRowPosition}");
+//        totalRange.Style = styleBase;
+//        totalRange.Style.Fill.BackgroundColor = XLColor.FromHtml(yellow);
+
+//        var pinkRangs = sheet.Ranges($"J7:K{totalRowPosition}");
+//        pinkRangs.Style.Fill.BackgroundColor = XLColor.FromHtml(lightPink);
+
+//        //最後調整整個Row跟Column的寬跟高才不會跑版 更改內容都會導致這設定無效
+//        //sheet.Rows().Height = 30;
+//        //sheet.Columns().Width = 20;           
+
+//        return workbook;
+//    }
+
+//}
+
+public class ExcelBuilder:IDisposable
+{
+    public static ExcelBuilder New(string filePath = "")
+    {
+        return new ExcelBuilder(filePath);
+    }
+    public static ExcelBuilder New(Stream file)
+    {
+        return new ExcelBuilder(file);
+    }
+    public static ExcelBuilder New(XLWorkbook book)
+    {
+        return new ExcelBuilder(book);
+    }
+
+    public XLWorkbook workBook;
+
+    public ExcelBuilder(string filePath)
+    {
+        if (!string.IsNullOrEmpty(filePath))
+            workBook = new XLWorkbook(filePath);
+        else
+            workBook = new XLWorkbook();
+    }
+
+    public ExcelBuilder(Stream file)
+    {
+        workBook = new XLWorkbook(file);
+    }
+
+    public ExcelBuilder(XLWorkbook book)
+    {
+        workBook = book;
+    }
+    public WorkSheet getSheet(int position)
+    {
+        return new WorkSheet(this, workBook.Worksheet(position).Name, position);
+    }
+
+    public WorkSheet addSheet(IXLWorksheet sheet, int position = 1)
+    {
+        sheet.CopyTo(workBook, sheet.Name, position);
+        return new WorkSheet(this, sheet.Name, position);
+    }
+    public WorkSheet addSheet(IXLWorksheet sheet, string sheetName, int position = 1)
+    {
+        sheet.CopyTo(workBook, sheetName, position);
+        return new WorkSheet(this, sheetName, position);
+    }
+    public WorkSheet addSheet(string sheetName, int position = 1)
+    {
+        workBook.AddWorksheet(sheetName, position);
+        return new WorkSheet(this, sheetName, position);
+    }
+    public WorkSheet Sheet(int position)
+    {
+        var sheet = workBook.Worksheet(position);
+        return new WorkSheet(this, sheet.Name, position);
+    }
+
+    /// <summary>
+    /// 生成實體文件
+    /// </summary>
+    /// <param name="file">完整檔案路徑\檔案名稱.副檔名</param>
+    public void SaveAs(string file)
+    {
+        workBook.SaveAs(file);
+    }
+
+    public void SaveAs(Stream stream)
+    {
+        workBook.SaveAs(stream);
+    }
+
+    public void Dispose()
+    {
+        workBook.Dispose();
+    }
+}
+#endregion
