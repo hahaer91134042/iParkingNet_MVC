@@ -1,0 +1,38 @@
+# 編譯產出
+/bin/
+/obj/
+/publish/
+/Debug/
+/Release/
+/*.user
+/*.suo
+/*.sln.docstates
+/*.csproj.user
+/*.psess
+/TestResults/
+
+# NuGet 套件
+/packages/
+/nupkg/
+
+# VS Code 設定
+.vscode/
+.vs/
+
+# Rider 設定
+.idea/
+
+# 設定檔
+appsettings.Development.json
+*.config
+*.secrets.json
+
+# 作業系統檔案
+Thumbs.db
+*.DS_Store
+
+# 其他
+*.log
+*.bak
+*.swp
+*.sqlite
